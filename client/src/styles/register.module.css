@@ -1,0 +1,22 @@
+.design{
+    background-color: rgb(219, 198, 201);
+    margin: 0 auto;
+    padding: 10px;
+    width: 30%;
+    
+   
+
+}
+.h{
+    text-align: center;
+}
+.box{
+    
+    width: 60%;
+   
+}
+.page{
+background-color: red;
+height: 100vh;
+padding-top: 150px;
+}
