@@ -16,9 +16,25 @@ const SignupSchema = Yup.object().shape({
   phoneNumber:Yup.string().max(11) .required('Required'),
   gender:Yup.string() .required('Required'),
   address:Yup.string() .required('Required'),
+  password: Yup.string().required('Password is required')
 });
 
 export const register = () =>{
+
+const handleRegister =async(values)=>{
+  const res = await fetch('http://localhost:4001/patient-register', {
+    method:'POST', 
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(values)
+  })
+  const data = await res.json()
+    messageApi.open({
+      type: res.status == 200 ? 'success': 'error',
+      content: data.msg,
+    });
+  console.log(res)
+}
+
   return(
 <div className={styles.page}> 
     <div className={styles.design}>
@@ -31,13 +47,14 @@ export const register = () =>{
         phoneNumber:'',
         bloodgroup:'',
         gender:'',
-        address:''
+        address:'',
+        password:''
 
       }}
       validationSchema={SignupSchema}
       onSubmit={values => {
         // same shape as initial values
-        console.log(values);
+       handleRegister(values)
       }}
     >
       {({ errors, touched }) => (
@@ -76,6 +93,9 @@ export const register = () =>{
             <div>{errors.address}</div>
           ) : null}
            <br/>  <br/>
+           <Field name="password" type="password" placeholder="Enter your password"/>
+           {errors.password && touched.password? <div>{errors.password}</div> : null}
+           <br /><br />
 
            <div className={styles.h}>
           <button type="submit">Submit</button>
