@@ -9,14 +9,23 @@
 }
 .h{
     text-align: center;
+   
 }
+
+/* h1{
+    border: 1px solid blue;
+    background-color: lightblue;
+} */
 .box{
     
     width: 60%;
    
 }
 .page{
-background-color: red;
-height: 100vh;
+
+background: url('../../public/hos.jpg');
+height: 80vh;
+background-size: cover;
+
 padding-top: 150px;
 }

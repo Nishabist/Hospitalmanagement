@@ -3,6 +3,8 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link'
+import styles from '../../styles/register.module.css'
+
 const SignupSchema = Yup.object().shape({
 
     phonenumber: Yup.string().required('Required'),
@@ -13,8 +15,10 @@ const SignupSchema = Yup.object().shape({
 
 export const loginpage = () => {
     return(
-        <div className='form'>
-    <h1>Login</h1>
+    <div className={styles.page}> 
+      <div className={styles.design}>
+      
+    <h1 className={styles.h}>Patient Login</h1>
     
     {/* <Image
       src="/Sahayogi.png"
@@ -49,7 +53,7 @@ export const loginpage = () => {
           <br />
           <br />
           
-          <button className='btn' type="submit">Submit</button>
+          <button className='btn' type="submit">Login</button>
           <br />
           if you don"t have account
           <br /><Link href="./register">go to register</Link>
@@ -58,6 +62,8 @@ export const loginpage = () => {
       )}
     </Formik>
   </div>
+  </div>
+
 )}
    
 export default loginpage
