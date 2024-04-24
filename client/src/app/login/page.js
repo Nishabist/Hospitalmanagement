@@ -4,16 +4,31 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link'
 import styles from '../../styles/register.module.css'
+import {  message } from 'antd';
 
 const SignupSchema = Yup.object().shape({
 
-    phonenumber: Yup.string().required('Required'),
+    phoneNumber: Yup.string().required('Required'),
     password:Yup.string().
     required('Required')
   });
   
 
 export const loginpage = () => {
+  const [messageApi, contextHolder] = message.useMessage();
+const handleLogin =async(values)=>{
+  const res = await fetch('http://localhost:4001/patient-login', {
+    method:'POST', 
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(values)
+  })
+  const data = await res.json()
+    messageApi.open({
+      type: res.status == 200 ? 'success': 'error',
+      content: data.msg,
+    });
+  console.log(res)
+}
     return(
     <div className={styles.page}> 
       <div className={styles.design}>
@@ -29,7 +44,7 @@ export const loginpage = () => {
     <Formik
       initialValues={{
        
-      phonenumber:'',
+      phoneNumber:'',
         password:'',
       }}
       validationSchema={SignupSchema}
@@ -40,12 +55,12 @@ export const loginpage = () => {
     >
       {({ errors, touched }) => (
         <Form >
-         {/* {contextHolder} */}
+         {contextHolder}
           {/* <Field name="phonenumber" type="phonenumber" placeholder="Enter your phonenumber" />
           {errors.phonenumber && touched.phonenumber ? <div>{errors.phonenumber}</div> : null}
           <br /> */}phoneNumber:
-           <Field name="phonenumber" type="phonenumber" placeholder="Enter your phonenumber"/>
-          {errors.phonenumber && touched.phonenumber? <div>{errors.phonenumber}</div> : null}
+           <Field name="phoneNumber" type="phoneNumber" placeholder="Enter your phonenumber"/>
+          {errors.phoneNumber && touched.phoneNumber? <div>{errors.phoneNumber}</div> : null}
           <br />
           <br />
           Password:
