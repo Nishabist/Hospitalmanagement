@@ -1,10 +1,11 @@
 'use client'
+
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link'
 import styles from '../../styles/register.module.css'
-
+import {  message } from 'antd';
 
 const SignupSchema = Yup.object().shape({
   Name: Yup.string() .required('Required')
@@ -20,7 +21,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 export const register = () =>{
-
+  const [messageApi, contextHolder] = message.useMessage();
 const handleRegister =async(values)=>{
   const res = await fetch('http://localhost:4001/patient-register', {
     method:'POST', 
@@ -59,6 +60,7 @@ const handleRegister =async(values)=>{
     >
       {({ errors, touched }) => (
         <Form>
+        {contextHolder}
          Name: <Field name="Name" className={styles.box} />
           {errors.firstName && touched.firstName ? (
             <div>{errors.firstName}</div>
@@ -93,7 +95,7 @@ const handleRegister =async(values)=>{
             <div>{errors.address}</div>
           ) : null}
            <br/>  <br/>
-           <Field name="password" type="password" placeholder="Enter your password"/>
+           password:<Field name="password" type="password" placeholder="Enter your password" className={styles.box}/>
            {errors.password && touched.password? <div>{errors.password}</div> : null}
            <br /><br />
 

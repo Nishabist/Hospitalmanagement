@@ -43,21 +43,22 @@ export const loginpage = () => {
          {/* {contextHolder} */}
           {/* <Field name="phonenumber" type="phonenumber" placeholder="Enter your phonenumber" />
           {errors.phonenumber && touched.phonenumber ? <div>{errors.phonenumber}</div> : null}
-          <br /> */}
+          <br /> */}phoneNumber:
            <Field name="phonenumber" type="phonenumber" placeholder="Enter your phonenumber"/>
           {errors.phonenumber && touched.phonenumber? <div>{errors.phonenumber}</div> : null}
           <br />
           <br />
+          Password:
           <Field name="password" type="password" placeholder="Enter your password"/>
           {errors.password && touched.password? <div>{errors.password}</div> : null}
           <br />
           <br />
-          
-          <button className='btn' type="submit">Login</button>
+          <div className={styles.h}>
+          <button className='btn' type="submit" >Login</button>
           <br />
           if you don"t have account
           <br /><Link href="./register">go to register</Link>
-         
+          </div>
         </Form>
       )}
     </Formik>
